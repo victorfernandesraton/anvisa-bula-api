@@ -1,0 +1,59 @@
+import {MedicItem} from '../entity/medicItem.mjs'
+
+/**
+ * 
+ * @param {Browser} browser 
+ */
+export const executieRequest = (browser) => async ({ category, name, registerNumber, bulaId,  retailCnpj , bulaCode, publishedBefore, publishedAfter }) => {
+	let result = [];
+
+	const page = await browser.newPage()
+	await page.goto('https://consultas.anvisa.gov.br/#/bulario/', {
+		waitUntil: 'networkidle2',
+		timeout: 0
+	})
+
+	await page.waitForSelector('autocomplete > div > input')
+
+	if (name) {
+		await page.type('autocomplete > div > input', name)
+	}
+
+	if (retailCnpj) {
+		await page.type('input[ng-model="empresa.cnpj"]', retailCnpj)
+	}
+
+	if (bulaId) {
+		await page.type('#txtNumeroExpedienteBula', bulaId)
+	}
+
+	await page.click('.btn-primary')
+
+	await page.waitForSelector('td.col-sm-1')
+
+	const table = await page.$$('tr')
+
+	for (const line of table) {
+		const data = await line.$$('td.col-sm-1.ng-binding')
+		const links = await line.$$('td.col-sm-1 > a')
+		const linkResult = await Promise.all(links.map(item => item.evaluate(node => ({
+			content: node.innerHTML,
+			link: node.href
+		}))))
+
+		const [sellerInfo, bulaId, publishedAt] = await Promise.all(data.map(item => item.evaluate(node => node.innerHTML)))
+		const [medicamentInfo, bulaInfo, docBulaInfo] = linkResult.filter(item => !!item)
+
+		if (linkResult[0]) {
+			result.push(MedicItem.create({
+				name: medicamentInfo.content,
+				seller: sellerInfo,
+				doctorBulaURI: docBulaInfo.link,
+				patientBulaURI: bulaInfo.link,
+				publishedAt,
+				bulaId,
+			}))
+		}
+	}
+	return result
+}

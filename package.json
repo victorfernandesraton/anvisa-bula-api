@@ -1,0 +1,27 @@
+{
+	"name": "anvisa-bula-wrapper",
+	"version": "1.0.0",
+	"description": "API wrapper para a busca da anvisa",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "test",
+		"start": "npx cross-env NODE_ENV=development node index.mjs",
+		"start:prod": "npx cross-env NODE_ENV=production node index.mjs"
+	},
+	"keywords": [
+		"bula",
+		"Anvisa",
+		"api"
+	],
+	"author": "Victor Raton",
+	"license": "MIT",
+	"dependencies": {
+		"puppeteer": "^15.3.2"
+	},
+	"devDependencies": {
+		"cross-env": "^7.0.3",
+		"eslint": "^8.19.0",
+		"puppeteer-core": "^15.3.2"
+	}
+}
