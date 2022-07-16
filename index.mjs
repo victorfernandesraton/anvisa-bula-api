@@ -1,29 +1,16 @@
-#!/home/victor_raton/.asdf/shims/node
-import { connect, launch } from 'puppeteer';
-import { executieRequest } from './src/scrapper/executeRequest.mjs';
-(async () => {
+import http from 'node:http';
+import { handleError } from './src/app/error/handlerError.mjs';
+import { routes } from './src/app/routes/index.mjs';
+
+const handler = async (req, res) => {
 	try {
-
-		const browser = await launch({
-			headless: process?.env?.NODE_ENV == 'production',
-			args: [
-				'--disable-gpu',
-				'--disable-setuid-sandbox',
-				'--disable-dev-shm-usage',
-				'--no-first-run',
-				'--no-sandbox',
-				'--no-zygote',
-				'--single-process',
-			],
-		})
-
-		const response = await executieRequest(browser)({
-			bulaId: '4816690212'
-		})
-
-		console.log(response)
-		browser.close()
-	} catch (err) {
-		console.log(err)
+		return routes(req, res)
+	} catch (error) {
+		return handleError(error, res)
 	}
-})()
+}
+
+const server = http.createServer(handler)
+
+server.listen(8000)
+	.on('listening', () => console.log('listening on port 8000'))
