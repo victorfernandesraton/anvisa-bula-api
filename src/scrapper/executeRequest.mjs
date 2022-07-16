@@ -4,7 +4,7 @@ import {MedicItem} from '../entity/medicItem.mjs'
  * 
  * @param {Browser} browser 
  */
-export const executieRequest = (browser) => async ({ category, name, registerNumber, bulaId,  retailCnpj , bulaCode, publishedBefore, publishedAfter }) => {
+export const executieRequest = (browser) => async ({  name, registerNumber, bulaId,  retailCnpj  }) => {
 	let result = [];
 
 	const page = await browser.newPage()
@@ -25,6 +25,10 @@ export const executieRequest = (browser) => async ({ category, name, registerNum
 
 	if (bulaId) {
 		await page.type('#txtNumeroExpedienteBula', bulaId)
+	}
+
+	if(registerNumber) {
+		await page.type('#txtNumeroRegistro', registerNumber)
 	}
 
 	await page.click('.btn-primary')
