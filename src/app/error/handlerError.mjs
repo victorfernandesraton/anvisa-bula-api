@@ -1,12 +1,16 @@
+import log from "../log/index.mjs"
+
 export const handleError = (error, response) => {
 	if (error.message.includes('ENOENT')) {
-		console.warn(`asset not found ${error.stack}`)
+		log(`asset not found ${error.stack}`)
 		response.writeHead(404)
 		return response.end()
 	}
 
-	console.error(`caught error on API ${error.stack}`)
+	log(`caught error on API ${error.stack}`)
+	if (process.env.NODE_ENV !== 'production') {
+		log(error)
+	}
 	response.writeHead(500)
 	return response.end()
 }
-
