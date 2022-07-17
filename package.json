@@ -7,13 +7,15 @@
 	"scripts": {
 		"test": "test",
 		"start": "npx cross-env NODE_ENV=development node index.mjs",
-		"start:prod": "npx cross-env NODE_ENV=production node index.mjs"
+		"start:prod": "npx cross-env NODE_ENV=production node index.mjs",
+		"type:generate": "npx -p typescript tsc ./src/**/*.mjs  --declaration --allowJs --emitDeclarationOnly --skipLibCheck --declarationMap --outFile  ./types/index.d.ts"
 	},
 	"keywords": [
 		"bula",
 		"Anvisa",
 		"api"
 	],
+	"types": "types/index.d.ts",
 	"author": "Victor Raton",
 	"license": "MIT",
 	"dependencies": {
