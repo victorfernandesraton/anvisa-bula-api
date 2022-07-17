@@ -17,6 +17,7 @@
 	"author": "Victor Raton",
 	"license": "MIT",
 	"dependencies": {
+		"dotenv": "^16.0.1",
 		"puppeteer": "^15.3.2"
 	},
 	"devDependencies": {
