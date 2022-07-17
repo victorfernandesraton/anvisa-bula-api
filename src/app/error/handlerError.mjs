@@ -1,5 +1,11 @@
 import log from "../log/index.mjs"
 
+/**
+ * 
+ * @param {Error} error 
+ * @param {Response} response 
+ * @returns {Response}
+ */
 export const handleError = (error, response) => {
 	if (error.message.includes('ENOENT')) {
 		log(`asset not found ${error.stack}`)

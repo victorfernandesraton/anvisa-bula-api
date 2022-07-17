@@ -1,11 +1,20 @@
 import {MedicItem} from '../entity/medicItem.mjs'
 
-
 export class FindAllBulas {
 	constructor(browser) {
 		this.browser = browser
 	}
 
+	/**
+	 * 
+	 * @param {{
+	 * name?: string
+	 * registerNumber?: string
+	 * bulaId?: string | number
+	 * retailCnpj?: string | number
+	 * }} param0 
+	 * @returns {Promise<MedicItem[]>}
+	 */
 	async execute ({  name, registerNumber, bulaId,  retailCnpj  }) {
 		let result = [];
 	

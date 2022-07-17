@@ -10,9 +10,13 @@ export class FindAllBulasController extends BasicController {
 		this.findAllBulaService = new FindAllBulas(browser)
 	}
 
+	/**
+	 * 
+	 * @param {Request} request 
+	 * @param {Response} response 
+	 */
 	async getAllBulas(request, response) {
 		try {
-
 			const { query } = request
 			const data = await this.findAllBulaService.execute(query)
 			this.responseJson({ response, data })
