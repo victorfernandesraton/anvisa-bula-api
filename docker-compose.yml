@@ -1,10 +1,13 @@
 version: '3'
 services:
     api:
+        command: npm run start:prod
+        environment:
+            - PORT=8000
         build: .
         restart: always
         ports:
             - 8000:8000
         volumes:
             - .:/usr/app/
-            - /usr/app/node_modules		
+            - /usr/app/node_modules
