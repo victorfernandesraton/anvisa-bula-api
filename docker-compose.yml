@@ -2,6 +2,9 @@ version: '3'
 services:
     api:
         build: .
+        restart: always
+        ports:
+            - 8000:8000
         volumes:
             - .:/usr/app/
             - /usr/app/node_modules		
