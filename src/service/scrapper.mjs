@@ -12,6 +12,7 @@ export const scrapperFactory =async ({ productin }) => {
 			'--no-zygote',
 			'--single-process',
 		],
+		timeout:  30000
 	})
 
 	return browser

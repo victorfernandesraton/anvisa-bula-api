@@ -18,11 +18,17 @@ export class MedicItem {
 		seller
 	}) {
 		this.name = name;
-		this.doctorBulaURI = doctorBulaURI;
-		this.patientBulaURI = patientBulaURI;
+		this.bula = {
+			doctor: doctorBulaURI,
+			patient: patientBulaURI,
+		}
+		const [nameSeller, cnpj] = seller.split('-').map(item => item.trim())
+		this.seller = {
+			name: nameSeller,
+			cnpj
+		}
 		this.publishedAt = publishedAt;
-		this.seller = seller;
-		this.bulaId = bulaId;
+		this.id = bulaId;
 	}
 
 	/**
