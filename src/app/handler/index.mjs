@@ -1,5 +1,5 @@
-import { handleError } from "../error/handlerError.mjs"
-import { routes } from "../routes/index.mjs"
+import { handleError } from '../error/handlerError.mjs'
+import { routes } from '../routes/index.mjs'
 
 export default  async function (req, res, cache) {
 	try {

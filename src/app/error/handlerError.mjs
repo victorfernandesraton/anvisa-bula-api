@@ -1,4 +1,4 @@
-import log from "../log/index.mjs"
+import log from '../log/index.mjs'
 
 /**
  * 

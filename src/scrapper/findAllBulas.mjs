@@ -16,7 +16,7 @@ export class FindAllBulas {
 	 * @returns {Promise<MedicItem[]>}
 	 */
 	async execute ({  name, registerNumber, bulaId,  retailCnpj  }) {
-		let result = [];
+		let result = []
 	
 		const page = await this.browser.newPage()
 		await page.goto('https://consultas.anvisa.gov.br/#/bulario/', {

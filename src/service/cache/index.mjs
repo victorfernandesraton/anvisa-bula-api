@@ -1,5 +1,5 @@
-import { createClient } from 'redis';
-import config from '../../config/index.mjs';
+import { createClient } from 'redis'
+import config from '../../config/index.mjs'
 
 export default createClient({
 	url: `redis://${config.cache.domain}:${config.cache.port}`,

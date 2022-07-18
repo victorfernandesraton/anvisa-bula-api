@@ -17,7 +17,7 @@ export class MedicItem {
 		bulaId,
 		seller
 	}) {
-		this.name = name;
+		this.name = name
 		this.bula = {
 			doctor: doctorBulaURI,
 			patient: patientBulaURI,
@@ -27,8 +27,8 @@ export class MedicItem {
 			name: nameSeller,
 			cnpj
 		}
-		this.publishedAt = publishedAt;
-		this.id = bulaId;
+		this.publishedAt = publishedAt
+		this.id = bulaId
 	}
 
 	/**

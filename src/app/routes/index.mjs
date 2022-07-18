@@ -1,7 +1,7 @@
-import { scrapperFactory } from "../../service/scrapper.mjs";
-import { FindAllBulasController } from "../controller/findAllBulas.mjs";
-import { parseQueryFromURL } from "../utils/parseQuery.mjs";
-import { BULA_ROUTER, DEFAULT } from "./constants.mjs";
+import { scrapperFactory } from '../../service/scrapper.mjs'
+import { FindAllBulasController } from '../controller/findAllBulas.mjs'
+import { parseQueryFromURL } from '../utils/parseQuery.mjs'
+import { BULA_ROUTER, DEFAULT } from './constants.mjs'
 
 
 /**
@@ -12,12 +12,12 @@ import { BULA_ROUTER, DEFAULT } from "./constants.mjs";
  */
 export const routes = async (req, res, cache) => {
 	const screapperService = await scrapperFactory({ productin: true })
-	let { method, url } = req;
+	let { method, url } = req
 	req.query = parseQueryFromURL(url).query
 
 	if (method === 'GET' && !url || url === DEFAULT) {
-		res.writeHead(200, { 'Content-Type': 'text/plain' });
-		res.end('live :)');
+		res.writeHead(200, { 'Content-Type': 'text/plain' })
+		res.end('live :)')
 		return
 	}
 
@@ -34,7 +34,7 @@ export const routes = async (req, res, cache) => {
 		return
 	}
 
-	res.writeHead(404, { 'Content-Type': 'text/plain' });
-	res.end('not found');
+	res.writeHead(404, { 'Content-Type': 'text/plain' })
+	res.end('not found')
 	return
 }

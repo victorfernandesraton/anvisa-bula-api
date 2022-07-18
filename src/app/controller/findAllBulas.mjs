@@ -1,14 +1,13 @@
-import { TimeoutError } from "puppeteer";
-import { FindAllBulas } from "../../scrapper/findAllBulas.mjs";
-import { parseQueryToURL } from "../utils/parseQuery.mjs";
-import { BasicController } from "./basicController.mjs";
+import { TimeoutError } from 'puppeteer'
+import { FindAllBulas } from '../../scrapper/findAllBulas.mjs'
+import { BasicController } from './basicController.mjs'
 
 export class FindAllBulasController extends BasicController {
 	constructor({
 		browser,
 		cache
 	}) {
-		super(cache);
+		super(cache)
 		this.findAllBulaService = new FindAllBulas(browser)
 	}
 
