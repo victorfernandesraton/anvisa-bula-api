@@ -10,7 +10,7 @@ import { BULA_ROUTER, DEFAULT } from "./constants.mjs";
  * @param {Response} res 
  * @returns 
  */
-export const routes = async (req, res) => {
+export const routes = async (req, res, cache) => {
 	const screapperService = await scrapperFactory({ productin: true })
 	let { method, url } = req;
 	req.query = parseQueryFromURL(url).query
@@ -23,8 +23,12 @@ export const routes = async (req, res) => {
 
 	if (method === 'GET' && url.startsWith(BULA_ROUTER)) {
 		const handler = new FindAllBulasController({
-			browser: screapperService
+			browser: screapperService,
+			cache
 		})
+		if (cache) {
+			await handler.findDataInCache(req, res)
+		}
 		await handler.getAllBulas(req, res)
 		await screapperService.close()
 		return

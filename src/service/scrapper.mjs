@@ -14,6 +14,5 @@ export const scrapperFactory =async ({ productin }) => {
 		],
 		timeout:  30000
 	})
-
 	return browser
 }
