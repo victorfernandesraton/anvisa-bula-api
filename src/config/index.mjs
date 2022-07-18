@@ -12,5 +12,6 @@ export default {
 		database: process.env.REDIS_DATABASE,
 		port: process.env.REDIS_PORT,
 		domain: process.env.REDIS_HOST,
+		ttl: process.env.REDIS_TTL
 	}
 }

@@ -1,19 +1,26 @@
+import config from "../../config/index.mjs";
 import log from "../log/index.mjs";
 
 export class BasicController {
-	constructor(cache) {
+	/**
+	 * 
+	 * @param {cache} cache 
+	 * @param {*} ttl 
+	 */
+	constructor(cache, ttl) {
 		if (cache) {
 			this.cache = cache;
+			this.ttl = ttl ?? config.cache.ttl ?? 1000
 		}
 	}
 	/**
 	 * 
-	 * @param {{response: Response, data: any}} param0 
+	 * @param {{response: Response, data: any, request: Request, revalidate: boolean}} param0 
 	 * @returns {Response}
 	 */
-	async responseJson({ request, response, data }) {
+	async responseJson({ request, response, data, revalidate = true }) {
 		try {
-			if (this.cache) {
+			if (this.cache && revalidate) {
 				await this.saveDataInCache({
 					request, data, status: 200
 				})
@@ -28,15 +35,15 @@ export class BasicController {
 	}
 	/**
 	 * 
-	 * @param {{response: Response}} param0 
+	 * @param {{response: Response, request: Request, revalidate: boolean}} param0 
 	 * @returns {Response}
 	 */
-	async responseNotFound({ request, response }) {
+	async responseNotFound({ request, response, revalidate = true }) {
 		try {
 
-			if (this.cache) {
+			if (this.cache && revalidate) {
 				await this.saveDataInCache({
-					request, data, status: 404
+					request, data: [], status: 404
 				})
 			}
 			response.writeHead(404)
@@ -60,7 +67,9 @@ export class BasicController {
 				const cached = await this.cache.get(key)
 				const { data, status } = JSON.parse(cached)
 				if (status === 200) {
-					return this.responseJson({ request, response, data })
+					return this.responseJson({ request, response, data, revalidate: false })
+				} else {
+					return this.responseNotFound({ request, response, revalidate: false })
 				}
 			}
 		}
@@ -72,7 +81,10 @@ export class BasicController {
 	async saveDataInCache({ request, data, status }) {
 		const key = request.url
 		if (this.cache) {
-			await this.cache.set(key, JSON.stringify({ status, data }))
+			await this.cache.set(key, JSON.stringify({ status, data }), {
+				EX: this.ttl,
+				NX: true
+			})
 		}
 	}
 }
