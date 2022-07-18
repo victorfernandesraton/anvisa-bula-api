@@ -7,8 +7,7 @@
 	"scripts": {
 		"test": "test",
 		"start": "npx cross-env NODE_ENV=development nodemon index.mjs",
-		"start:prod": "npx cross-env NODE_ENV=production node index.mjs",
-		"type:generate": "npx -p typescript tsc ./src/**/*.mjs  --declaration --allowJs --emitDeclarationOnly --skipLibCheck --declarationMap --outFile  ./types/index.d.ts"
+		"start:prod": "npx cross-env NODE_ENV=production node index.mjs"
 	},
 	"keywords": [
 		"bula",
