@@ -12,9 +12,9 @@ RUN apt-get update && apt-get install curl gnupg -y \
 	&& apt-get install google-chrome-stable -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /opt/app
-WORKDIR /opt/app
-COPY package.json .
-RUN npm install --quiet
+
+ENV NODE_ENV production
+WORKDIR /usr/app
 COPY . .
+RUN npm install --quiet --omit=dev
 EXPOSE 8000

@@ -1,7 +1,7 @@
-version: '3'
+version: "3"
 services:
     api:
-        command: npm run start
+        command: npm run start:prod
         environment:
             - PORT=8000
             - REDIS_HOST=cache
@@ -10,11 +10,11 @@ services:
             - REDIS_PASS=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
             - REDIS_DATABASE=anvisa_bula_api_cache
         build: .
-        ports:
-            - '8000:8000'
+        restart: always
         volumes:
-            - .:/usr/app
-            - /usr/app/node_modules
+            - '.:/usr/app'
+        ports:
+            - "8000:8000"
         networks:
             - anvisa_service
         depends_on:
@@ -23,15 +23,15 @@ services:
         image: redis:6.2-alpine
         restart: always
         ports:
-        - '6379:6379'
+            - "6379:6379"
         command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-        volumes: 
-        - cache:/data
+        volumes:
+            - cache:/data
         networks:
             - anvisa_service
 volumes:
-  cache:
-    driver: local
+    cache:
+        driver: local
 networks:
     anvisa_service:
         name: anvisa_service

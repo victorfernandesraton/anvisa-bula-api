@@ -49,8 +49,7 @@ export class FindAllBulas {
 		const table = await page.$$('tr')
 	
 		for (const line of table) {
-			const data = await line.$$('td.col-sm-1.ng-binding')
-			const links = await line.$$('td.col-sm-1 > a')
+			const [data, links] = await Promise.all([line.$$('td.col-sm-1.ng-binding'),line.$$('td.col-sm-1 > a')])
 			const linkResult = await Promise.all(links.map(item => item.evaluate(node => ({
 				content: node.innerHTML,
 				link: node.href
