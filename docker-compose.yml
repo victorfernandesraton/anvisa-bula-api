@@ -11,8 +11,6 @@ services:
             - REDIS_DATABASE=anvisa_bula_api_cache
         build: .
         restart: always
-        volumes:
-            - '.:/usr/app'
         ports:
             - "8000:8000"
         networks:

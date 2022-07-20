@@ -6,8 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"test": "test",
-		"start": "npx cross-env NODE_ENV=development nodemon index.mjs",
-		"start:prod": "npx cross-env NODE_ENV=production node index.mjs"
+		"start": "nodemon index.mjs",
+		"start:prod": "NODE_ENV=production node index.mjs"
 	},
 	"keywords": [
 		"bula",

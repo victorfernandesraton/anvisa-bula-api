@@ -3,18 +3,15 @@ import { FindAllBulas } from '../../scrapper/findAllBulas.mjs'
 import { BasicController } from './basicController.mjs'
 
 export class FindAllBulasController extends BasicController {
-	constructor({
-		browser,
-		cache
-	}) {
+	constructor({ browser, cache }) {
 		super(cache)
 		this.findAllBulaService = new FindAllBulas(browser)
 	}
 
 	/**
-	 * 
-	 * @param {Request} request 
-	 * @param {Response} response 
+	 *
+	 * @param {Request} request
+	 * @param {Response} response
 	 */
 	async getAllBulas(request, response) {
 		try {
@@ -23,16 +20,25 @@ export class FindAllBulasController extends BasicController {
 			this.responseJson({
 				request,
 				response,
-				data
+				data,
 			})
 		} catch (error) {
 			if (error instanceof TimeoutError) {
 				this.responseNotFound({
 					response,
-					request
+					request,
 				})
 			} else {
-				throw error
+				switch (error.name) {
+				case 'NotFoundError':
+					return this.responseNotFound({
+						response,
+						request,
+					})
+
+				default:
+					throw error
+				}
 			}
 		}
 	}
