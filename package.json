@@ -6,7 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"test": "test",
-		"start": "nodemon index.mjs",
+		"start": "npx nodemon index.mjs",
 		"start:prod": "NODE_ENV=production node index.mjs"
 	},
 	"keywords": [
@@ -19,7 +19,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"dotenv": "^16.0.1",
-		"puppeteer": "^15.3.2",
+		"puppeteer": "15.5.0",
 		"redis": "^4.2.0"
 	},
 	"devDependencies": {
@@ -31,6 +31,6 @@
 		"eslint-plugin-promise": "^6.0.0",
 		"eslint-plugin-vue": "^9.2.0",
 		"nodemon": "^2.0.19",
-		"puppeteer-core": "^15.3.2"
+		"puppeteer-core": "15.5.0"
 	}
 }
