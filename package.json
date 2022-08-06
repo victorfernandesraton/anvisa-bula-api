@@ -1,36 +1,37 @@
 {
-	"name": "anvisa-bula-wrapper",
-	"version": "1.0.0",
-	"description": "API wrapper para a busca da anvisa",
-	"main": "index.js",
-	"type": "module",
-	"scripts": {
-		"test": "test",
-		"start": "npx nodemon index.mjs",
-		"start:prod": "NODE_ENV=production node index.mjs"
-	},
-	"keywords": [
-		"bula",
-		"Anvisa",
-		"api"
-	],
-	"types": "types/index.d.ts",
-	"author": "Victor Raton",
-	"license": "MIT",
-	"dependencies": {
-		"dotenv": "^16.0.1",
-		"puppeteer": "15.5.0",
-		"redis": "^4.2.0"
-	},
-	"devDependencies": {
-		"cross-env": "^7.0.3",
-		"eslint": "^8.20.0",
-		"eslint-config-standard": "^17.0.0",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-n": "^15.2.4",
-		"eslint-plugin-promise": "^6.0.0",
-		"eslint-plugin-vue": "^9.2.0",
-		"nodemon": "^2.0.19",
-		"puppeteer-core": "15.5.0"
-	}
+  "name": "anvisa-bula-wrapper",
+  "version": "1.0.0",
+  "description": "API wrapper para a busca da anvisa",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "start": "npx nodemon index.mjs",
+    "start:prod": "NODE_ENV=production node index.mjs"
+  },
+  "keywords": [
+    "bula",
+    "Anvisa",
+    "api"
+  ],
+  "types": "types/index.d.ts",
+  "author": "Victor Raton",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "jest": "^28.1.3",
+    "jest-puppeteer": "^6.1.1",
+    "puppeteer": "^16.0.0",
+    "redis": "^4.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.20.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.19",
+    "puppeteer-core": "^16.0.0"
+  }
 }

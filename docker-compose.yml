@@ -1,5 +1,16 @@
 version: "3"
 services:
+    api:
+        env_file:
+            - .env
+        build: .
+        restart: always
+        ports:
+            - "8000:8000"
+        networks:
+            - anvisa_service
+        depends_on:
+            - cache
     cache:
         image: redis:6.2-alpine
         restart: always
