@@ -1,24 +1,16 @@
 import { MedicItem } from '../entity/medicItem.mjs'
+import { BasicScrapper } from './basicScrapper.mjs'
 import { NotFoundError } from './error/notFoundError.mjs'
 
-export class FindAllBulas {
+export class FindAllBulas extends BasicScrapper {
 	/**
 	 * 
 	 * @param {import('puppeteer').Browser} browser 
 	 */
 	constructor(browser) {
-		this.browser = browser
+		super(browser)
 	}
 
-	async sucessRequest(page) {
-		const sucess = await page.waitForSelector('td.col-sm-1')
-		return { sucess: !!sucess }
-	}
-
-	async errorRequest(page) {
-		const toast = await page.waitForSelector('.toast-warning')
-		return { error: !!toast }
-	}
 
 	/**
 	 * 
