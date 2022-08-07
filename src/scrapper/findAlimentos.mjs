@@ -33,8 +33,8 @@ export class FindAlimentos  extends BasicScrapper {
 		const table = await page.$$('tr[ng-repeat="alimento in lista"]')
 		for (const line of table) {
 			const data = await line.$$('td[ng-click="detail(alimento)"]')
-			const [name] = await Promise.all(data.map(item => item.evaluate(node => node.innerHTML)))
-			result.push(Alimento.create({name}))
+			const [name, registerId, process, seller, , expiredIn] = await Promise.all(data.map(item => item.evaluate(node => node.innerHTML)))
+			result.push(Alimento.create({name,registerId, process, seller, expiredIn }))
 		}
 		return result
 	}

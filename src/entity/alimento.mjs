@@ -1,21 +1,29 @@
 export class Alimento {
-	constructor({name, registerId, process, expiredIn}) {
+	constructor({name, registerId, process, expiredIn, seller}) {
 		this.name = name
 		this.registerId = registerId
 		this.process = process
+		if (seller) {
+			const [sellerName, sellerCnpj] = seller.split('-').map(item => item.trim())
+			this.seller =  {
+				cnpj: sellerCnpj,
+				name: sellerName
+			}
+		}
 		if (expiredIn) {
-			const [year, month] = expiredIn.split('/')
+			const [ month, year] = expiredIn.split('/')
 			this.expiredIn = {
 				year,month
 			}
 		}
 	}
-	static create({name, registerId, process, expiredIn}) {
+	static create({name, registerId, process, expiredIn, seller}) {
 		return new Alimento({
 			name,
 			expiredIn, 
 			process, 
-			registerId
+			registerId,
+			seller
 		}) 
 	}
 }

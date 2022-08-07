@@ -2,13 +2,13 @@ import {describe, test, expect, beforeAll, afterAll, jest} from '@jest/globals'
 import {scrapperFactory} from '../../service/scrapper.mjs'
 import {  FindAllBulas} from '../findAllBulas.mjs'
 
-describe.skip('findAlimentos', () => { 
+describe('findAlimentos', () => { 
 	let stub
 	let browser
 	
 	jest.setTimeout(500000)
 	beforeAll( async () => {
-		browser = await scrapperFactory({productin: false})
+		browser = await scrapperFactory({productin: true})
 		stub = new FindAllBulas(browser)
 	})
 	
