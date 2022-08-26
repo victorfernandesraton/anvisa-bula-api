@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import config from './src/config/index.mjs'
 import { server } from './src/app/http/index.mjs'
 
