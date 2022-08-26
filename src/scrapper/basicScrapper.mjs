@@ -16,4 +16,14 @@ export class BasicScrapper {
 		const toast = await page.waitForSelector('.toast-warning')
 		return { error: !!toast }
 	}
+
+	/**
+	 * 
+	 * @param {*} _query 
+	 * @returns {Promise} Promise
+	 */
+	// eslint-disable-next-line no-unused-vars
+	async execute(query) {
+		throw new Error('not implemented')
+	}
 }

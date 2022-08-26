@@ -1,17 +1,22 @@
+import { TimeoutError } from 'puppeteer'
 import config from '../../config/index.mjs'
+// eslint-disable-next-line no-unused-vars
+import { BasicScrapper } from '../../scrapper/basicScrapper.mjs'
 import log from '../log/index.mjs'
 
 export class BasicController {
 	/**
 	 *
 	 * @param {cache} cache
+	 * @param {BasicScrapper} service
 	 * @param {*} ttl
 	 */
-	constructor (cache, ttl) {
+	constructor (cache, service, ttl) {
 		if (cache) {
 			this.cache = cache
 			this.ttl = ttl ?? config.cache.ttl ?? 1000
 		}
+		this.service = service
 	}
 
 	/**
@@ -87,6 +92,41 @@ export class BasicController {
 				EX: this.ttl,
 				NX: true
 			})
+		}
+	}
+
+	/**
+	 *
+	 * @param {Request} request
+	 * @param {Response} response
+	 */
+	async findAll(request, response) {
+		try {
+			const query = request.query
+			const data = await this.service.execute(query)
+			this.responseJson({
+				request,
+				response,
+				data,
+			})
+		} catch (error) {
+			if (error instanceof TimeoutError) {
+				this.responseNotFound({
+					response,
+					request,
+				})
+			} else {
+				switch (error.name) {
+				case 'NotFoundError':
+					return this.responseNotFound({
+						response,
+						request,
+					})
+
+				default:
+					throw error
+				}
+			}
 		}
 	}
 }
